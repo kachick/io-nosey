@@ -36,6 +36,9 @@ It is pure-ruby and tiny.
       end
     end
 
+* yes or no
+    bool = IO::Nosey.agree? 'Do you like this interface?'
+
 * get password(no echo)
     password = IO::Nosey.secret 'What your password?'
     password = IO::Nosey.password 'What your password?'
