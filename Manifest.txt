@@ -1,0 +1,8 @@
+History.rdoc
+Manifest.txt
+README.rdoc
+Rakefile
+lib/io/nosey.rb
+lib/io/nosey/core.rb
+test/test_helper.rb
+test/test_io-nosey.rb
