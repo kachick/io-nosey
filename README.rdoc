@@ -2,37 +2,43 @@
 
 http://github.com/kachick/io-nosey
 
-== DESCRIPTION:
+== DESCRIPTION
 
-This project provide you Simple Operating Interface with CLI/Console.
-It is pure-ruby and tiny.
+This tiny library provides you a simple driving interface via console.
 
-== FEATURES/PROBLEMS:
+== FEATURES
 
-* test case
+* pure-ruby
+* for CLI (called: Terminal, Console)
+
+== PROBLEMS
+
+* test-case
 * UI of IO::Nosey#choose
 
-== SYNOPSIS:
+== SYNOPSIS
 
 * setup
     require 'io/nosey'
 
 * basic
-    answer = IO::Nosey.ask 'What your favorite?'
+    answer = IO::Nosey.ask 'What\'s your favorite?'
 
 * with simple condition
-    name = IO::Nosey.ask 'What your name?', /\A\w+ \w+\z/
+    name = IO::Nosey.ask 'What\'s your name?', /\A\w+ \w+\z/
 
 * handling return value
-    full_name, last_name, family_name = IO::Nosey.ask('What your name?', /\A(\w+) (\w+)\z/){|s, m|[s, m[1], m[2]]}
+    full_name, last_name, family_name = IO::Nosey.ask('What\'s your name?', /\A(\w+) (\w+)\z/){|s, m|[s, m[1], m[2]]}
 
 * handling detail
     age = IO::Nosey.ask('How old are you?', /\A(\d+)\z/) do |s, m|
-      case age = m[1].to_i
-      when 0..140
-        age
+      case n = m[1].to_i
+      when 10..100
+	    n
+      when Fixnum
+		invalid 'Realy?'
       else
-        invalid
+        invalid 'Your input is invalid.'
       end
     end
 
@@ -41,7 +47,17 @@ It is pure-ruby and tiny.
 
 * get password(no echo)
     password = IO::Nosey.secret 'What your password?'
+	# aliased
     password = IO::Nosey.password 'What your password?'
+
+    # with strength check
+    password = IO::Nosey.password('What\'s your password?') do |s|
+      if (s.length >= 8) && (/[a-z]/ =~ s) && (/[A-Z]/ =~ s) && (/\d/ =~ s)
+        s
+      else
+        invalid 'Your password is too weak!'
+      end
+    end
 
 * choose one
     choice = IO::Nosey.choose 'Which 5 do you like?', 5, 'five', :FIVE
@@ -55,15 +71,15 @@ It is pure-ruby and tiny.
       end
     end
 
-== REQUIREMENTS:
+== REQUIREMENTS
 
 * Ruby 1.9.3
 
-== INSTALL:
+== INSTALL
 
 * sudo gem install io-nosey
 
-== LICENSE:
+== LICENSE
 
 (The MIT License)
 
