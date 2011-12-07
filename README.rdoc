@@ -34,9 +34,9 @@ This tiny library provides you a simple driving interface via console.
     age = IO::Nosey.ask('How old are you?', /\A(\d+)\z/) do |s, m|
       case n = m[1].to_i
       when 10..100
-	    n
+        n
       when Fixnum
-		invalid 'Realy?'
+        invalid 'Realy?'
       else
         invalid 'Your input is invalid.'
       end
@@ -47,7 +47,7 @@ This tiny library provides you a simple driving interface via console.
 
 * get password(no echo)
     password = IO::Nosey.secret 'What your password?'
-	# aliased
+    # aliased
     password = IO::Nosey.password 'What your password?'
 
     # with strength check
