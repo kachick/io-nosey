@@ -52,7 +52,7 @@ This tiny library provides you a simple driving interface via console.
 
     # with strength check
     password = IO::Nosey.password('What\'s your password?') do |s|
-      if (s.length >= 8) && (/[a-z]/ =~ s) && (/[A-Z]/ =~ s) && (/\d/ =~ s)
+      if (s.length >= 8) && [/[a-z]/, /[A-Z]/, /\d/].all?{|r|r =~ s}
         s
       else
         invalid 'Your password is too weak!'
