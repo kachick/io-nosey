@@ -64,7 +64,7 @@ a tiny library, provides a simple handling interface via io-console.
     end
 
 * choose one
-    choice = IO::Nosey.choose 'Which 5 do you like?', 5, 'five', :FIVE
+    choice = choose 'Which 5 do you like?', 5, 'five', :FIVE
 
 == REQUIREMENTS
 
