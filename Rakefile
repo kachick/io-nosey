@@ -1,5 +1,5 @@
 require 'rubygems'
-gem 'hoe', '>= 2.1.0'
+gem 'hoe', '>= 2.13.0'
 require 'hoe'
 require 'fileutils'
 
@@ -10,10 +10,10 @@ Hoe.plugin :newgem
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
 $hoe = Hoe.spec 'io-nosey' do
-  self.developer 'Kenichi Kamiya', 'kachick1+ruby@gmail.com'
-  self.rubyforge_name       = self.name # TODO this is default value
-  # self.extra_deps         = [['activesupport','>= 2.0.2']]
-
+  developer 'Kenichi Kamiya', 'kachick1+ruby@gmail.com'
+  self.rubyforge_name       = name
+  require_ruby_version '>= 1.9.3'
+  dependency 'yard', '>= 0.7.4', :development
 end
 
 require 'newgem/tasks'
