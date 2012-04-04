@@ -1,9 +1,9 @@
+README.rdoc
+LICENSE
 History.rdoc
 Manifest.txt
-README.rdoc
 Rakefile
 lib/io/nosey.rb
-lib/io/nosey/core.rb
 lib/io/nosey/version.rb
 lib/io/nosey/noseyparker.rb
 test/test_helper.rb
