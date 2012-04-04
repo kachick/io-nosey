@@ -7,11 +7,11 @@ class IO; module Nosey
   class NoseyParker
     extend Forwardable
     
-    class InvalidError < RuntimeError
+    class InvalidInputError < RuntimeError
     end
     
     private_class_method(*Forwardable.instance_methods(false))
-    private_constant :InvalidError
+    private_constant :InvalidInputError
 
     def initialize(input=$stdin, output=$stdout)
       @input, @output = input, output
@@ -45,8 +45,8 @@ class IO; module Nosey
         invalid
       end
       
-    rescue InvalidError => e
-      puts e.message unless e.message.empty?
+    rescue InvalidInputError
+      puts $!.message unless $!.message.empty?
       retry
     end
 
@@ -74,8 +74,10 @@ class IO; module Nosey
     private
 
     def invalid(cause='We are not satisfied with your answer.')
-      raise InvalidError, cause
+      raise InvalidInputError, cause
     end
+    
+    alias_method :error, :invalid
     
     def ask_oneline(prompt, regexp=nil, handling=nil)
       raise ArgumentError unless block_given?
@@ -105,8 +107,8 @@ class IO; module Nosey
         raise ArgumentError
       end
       
-    rescue InvalidError => e
-      puts e.message unless e.message.empty?
+    rescue InvalidInputError
+      puts $!.message unless $!.message.empty?
       retry
     end
   end

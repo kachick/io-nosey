@@ -6,7 +6,7 @@
 
 == Description
 
-Tiny driving assistant in console scripting.
+A tiny driving assistant with daily console scripting.
 
 == Features
 
@@ -73,6 +73,8 @@ Tiny driving assistant in console scripting.
   target released versions
   
   * 1.9.3-p125
+
+* validation
 
 == Installation
 

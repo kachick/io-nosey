@@ -1,4 +1,4 @@
-class IO; module Nosey
-  VERSION = '0.0.2'.freeze
+module IO::Nosey
+  VERSION = '0.1.0'.freeze
   Version = VERSION
-end; end
+end
