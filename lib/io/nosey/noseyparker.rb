@@ -15,6 +15,7 @@ class IO; module Nosey
     class InvalidInputError < InvalidError; end
     OPTIONAL_KEYS = [:input, :default, :parse, :return, :echo].freeze
     DEFAULT_OPTIONS = {echo: true}.freeze
+
     def initialize(input=$stdin, output=$stdout)
       @input, @output = input, output
     end
@@ -24,7 +25,7 @@ class IO; module Nosey
     
     def ask(prompt, options=DEFAULT_OPTIONS)
       options = DEFAULT_OPTIONS.merge options
-      unless OPTIONAL_KEYS? options
+      unless valid_options? options
         raise ArgumentError, 'including invalid options' 
       end
       
@@ -101,7 +102,7 @@ class IO; module Nosey
     
     private
     
-    def OPTIONAL_KEYS?(options)
+    def valid_options?(options)
       raise unless (options.keys - OPTIONAL_KEYS).empty?
       raise if options.has_key?(:parse) and !Validation.adjustable?(options[:parse])
       raise if options.has_key?(:input) and !options[:input].kind_of?(Regexp)
