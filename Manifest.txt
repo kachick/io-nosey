@@ -8,3 +8,4 @@ lib/io/nosey/version.rb
 lib/io/nosey/noseyparker.rb
 test/test_helper.rb
 test/test_io-nosey.rb
+example/example.rb

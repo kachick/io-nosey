@@ -16,55 +16,28 @@ A tiny driving assistant with daily console scripting.
 
 * setup
     require 'io/nosey'
+    
+    include IO::Nosey
+    
+* with input validation
+    ask "What's your name?", input: /\A\w+ \w+\z/
 
-* extend interface
-    class MyUI
-      include IO::Nosey
+* with default value
+    ask "What's your favorite?", default: 'ruby'
 
-      def some_action
-        ask 'Can you see?'
-      end
-    end
+* handle return value
+    last_name, family_name = ask "What's your name?", input: /\A\w+ \w+\z/, parse: ->s{s.split}
 
-* basic
-    answer = ask 'What\'s your favorite?'
-
-* with simple condition
-    name = ask 'What\'s your name?', /\A\w+ \w+\z/
-
-* handling return value
-    full_name, last_name, family_name = 
-    ask('What\'s your name?', /\A(\w+) (\w+)\z/){|s, m|[s, m[1], m[2]]}
-
-* handling detail
-    age = ask('How old are you?', /\A(\d+)\z/) do |s, m|
-      case n = Integer(m[1])
-      when 10..100
-        n
-      when Fixnum
-        invalid 'Realy?'
-      else
-        invalid 'Your input is invalid.'
-      end
-    end
+    ask 'How old are you?', input: /\A(\d+)\z/, parse: ->s{Integer s}, return: 10..100
 
 * yes or no
-    bool = agree? 'Do you like this interface?'
+    agree? 'Do you like this API?'
 
-* get password(no echo)
-    password = secret 'What your password?'
-
-    # with strength check
-    password = secret('What\'s your password?') do |s|
-      if (s.length >= 8) && [/[a-z]/, /[A-Z]/, /\d/].all?{|r|r =~ s}
-        s
-      else
-        invalid 'Your password is too weak!'
-      end
-    end
+* get password
+    ask "What's your password?", echo: false
 
 * choose one
-    choice = choose 'Which 5 do you like?', 5, 'five', :FIVE
+    choose 'Which Five do you like?', 5 => 'Integer', 'five' => 'String', :FIVE => 'Symbol'
 
 == Requirements
 
@@ -74,7 +47,7 @@ A tiny driving assistant with daily console scripting.
   
   * 1.9.3-p125
 
-* validation
+* validation-0.0.3
 
 == Installation
 
