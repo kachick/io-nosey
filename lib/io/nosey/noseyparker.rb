@@ -64,7 +64,7 @@ class IO; module Nosey
     
     # @param [String] prompt
     def agree?(prompt)
-      print "#{prompt} (chose [y or n])"
+      print "#{prompt} [y or n]"
 
       input = getch
       print "\n"
