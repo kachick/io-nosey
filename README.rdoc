@@ -15,7 +15,7 @@ A tiny assistant for CUI operations.
     
 === API
 
-==== Main Methods
+==== Provide Methods
 
 * #ask
 * #agree?
@@ -36,16 +36,8 @@ A tiny assistant for CUI operations.
 
 === Tutorial
 
-Try below senario.
+Try below senario on the irb/pry.
 Or excute "example/tutorial.rb".
-
-==== shell
-
-    > irb
-    
-or
-    
-    > pry
 
 ==== setup
 
