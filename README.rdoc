@@ -1,12 +1,11 @@
-= IO::Nosey
+= io-nosey
 
-* http://github.com/kachick/io-nosey
-* http://rubygems.org/gems/io-nosey
-* http://rubyforge.org/projects/io-nosey
+code :: http://github.com/kachick/io-nosey
+bugs :: https://github.com/kachick/io-nosey/issues
 
 == Description
 
-A tiny driving assistant with daily console scripting.
+A tiny assistant for CUI.
 
 == Features
 
@@ -14,47 +13,90 @@ A tiny driving assistant with daily console scripting.
 
 == Usage
 
-* setup
+=== Overview
+    
     require 'io/nosey'
     
+    class MyAssistant
+
+      include IO::Nosey
+      
+      def hear
+        ask 'question: '
+      end
+ 
+    end
+    
+=== API
+
+==== Main Methods
+
+* #ask
+* #agree?
+* #choose
+
+==== Option Parameter(like "Keyword Arguments")
+
+===== Sequense(input -> parse -> return)
+
+* input     # validation for input string
+* parse     # procedure for input string
+* return    # validation for return value
+
+===== Other
+
+* default   # when null input
+* echo      # set "echo is (true or false)"
+
+=== Tutorial
+
+==== setup
+
+    require 'io/nosey'
     include IO::Nosey
     
-* with input validation
+==== input validation
+
     ask "What's your name?", input: /\A\w+ \w+\z/
 
-* with default value
+==== default value
+
     ask "What's your favorite?", default: 'ruby'
 
-* handle return value
-    last_name, family_name = ask "What's your name?", input: /\A\w+ \w+\z/, parse: ->s{s.split}
+==== mix
 
-    ask 'How old are you?', input: /\A(\d+)\z/, parse: ->s{Integer s}, return: 10..100
+    ask 'How old are you?', input:  /\A(\d+)\z/,
+                            parse:  ->s{Integer s},
+                            return: 10..100
 
-* yes or no
+==== yes or no
+
     agree? 'Do you like this API?'
 
-* get password
+==== for password
+
     ask "What's your password?", echo: false
 
-* choose one
-    choose 'Which Five do you like?', 5 => 'Integer', 'five' => 'String', :FIVE => 'Symbol'
+==== choose one
+
+    choose 'Which Five do you like?',  5     => '5 is a Integer',
+                                      'five' => '"five" is a String',
+                                      :FIVE  => ':FIVE is a Symbol'
 
 == Requirements
 
 * Ruby 1.9.3 or later
-  
-  target released versions
-  
-  * 1.9.3-p125
-
 * validation-0.0.3
 
 == Installation
 
-* gem install io-nosey
+gem install io-nosey
 
 == License
 
+The MIT X11 License
+
 Copyright (c) 2011 Kenichi Kamiya
 
-The MIT License (See the file LICENSE)
+See the file LICENSE for further details.
+
