@@ -2,8 +2,6 @@
 
 require 'forwardable'
 require 'validation'
-require_relative 'nosey/version'
-require_relative 'nosey/noseyparker'
 
 class IO
 
@@ -22,3 +20,6 @@ class IO
   end
 
 end
+
+require_relative 'nosey/version'
+require_relative 'nosey/noseyparker'

@@ -5,6 +5,7 @@ require 'validation'
 class IO; module Nosey 
 
   class NoseyParker
+  
     extend Forwardable
     private_class_method(*Forwardable.instance_methods(false))
     include Validation
@@ -123,6 +124,7 @@ class IO; module Nosey
     def valid_choices?(choices)
       choices.keys.length >= 1
     end
+
   end
   
 end; end
