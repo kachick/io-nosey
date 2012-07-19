@@ -4,7 +4,6 @@ require 'validation'
 
 class IO; module Nosey 
 
-  # @author Kenichi Kamiya
   class NoseyParker
     extend Forwardable
     private_class_method(*Forwardable.instance_methods(false))
@@ -13,6 +12,7 @@ class IO; module Nosey
     include Validation::Adjustment
     
     class InvalidInputError < InvalidError; end
+
     OPTIONAL_KEYS = [:input, :default, :parse, :return, :echo].freeze
     DEFAULT_OPTIONS = {echo: true}.freeze
 
@@ -23,6 +23,8 @@ class IO; module Nosey
     def_delegators :@input, :gets, :getc, :getch, :noecho, :raw, :winsize
     def_delegators :@output,:print, :puts, :flush, :<<    
     
+    # @param [String] prompt
+    # @param [Hash] options
     def ask(prompt, options=DEFAULT_OPTIONS)
       options = DEFAULT_OPTIONS.merge options
       unless valid_options? options
@@ -58,7 +60,8 @@ class IO; module Nosey
       puts $!.message unless $!.message.empty?
       retry
     end
-
+    
+    # @param [String] prompt
     def agree?(prompt)
       print "#{prompt} (chose [y or n])"
 
@@ -77,8 +80,10 @@ class IO; module Nosey
       puts $!.message unless $!.message.empty?
       retry
     end
-
-    # @param choices [Hash] {value => description}
+    
+    # @param [String] prompt
+    # @param [Hash] choices {value => description}
+    # @return a member of choices
     def choose(prompt, choices)
       raise ArgumentError unless valid_choices? choices
       puts prompt
