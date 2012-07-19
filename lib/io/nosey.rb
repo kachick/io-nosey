@@ -2,6 +2,8 @@
 
 require 'forwardable'
 require 'validation'
+require_relative 'nosey/version'
+require_relative 'nosey/noseyparker'
 
 class IO
 
@@ -12,7 +14,6 @@ class IO
     include Validation
     
     NOSEY_PARKER = NoseyParker.new
-    private_constant :NoseyParker, :NOSEY_PARKER
 
     module_function
     def_delegators :NOSEY_PARKER, :ask, :agree?, :choose
@@ -21,5 +22,4 @@ class IO
 
 end
 
-require_relative 'nosey/version'
-require_relative 'nosey/noseyparker'
+
