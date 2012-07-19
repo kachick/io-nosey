@@ -1,4 +1,4 @@
-gem 'hoe', '~> 3.0.1'
+gem 'hoe', '~> 3.0.6'
 require 'hoe'
 require 'fileutils'
 
@@ -9,7 +9,7 @@ $hoe = Hoe.spec 'io-nosey' do
   self.rubyforge_name       = name
   require_ruby_version '>= 1.9.3'
   dependency 'validation', '~> 0.0.3', :runtime
-  dependency 'yard', '>= 0.7.5', :development
+  dependency 'yard', '>= 0.8.2.1', :development
 end
 
 require 'newgem/tasks'
