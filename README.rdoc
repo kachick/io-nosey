@@ -37,7 +37,7 @@ A tiny assistant for CUI operations.
 === Tutorial
 
 Try below senario.
-Or excute "example/example.rb".
+Or excute "example/tutorial.rb".
 
 ==== shell
 
