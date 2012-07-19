@@ -1,5 +1,4 @@
-# IO::Nosey
-#   Copyright (C) 2011  Kenichi Kamiya
+# Copyright (C) 2011  Kenichi Kamiya
 
 require 'forwardable'
 require 'validation'
