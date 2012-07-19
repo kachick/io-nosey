@@ -5,27 +5,13 @@ bugs :: https://github.com/kachick/io-nosey/issues
 
 == Description
 
-A tiny assistant for CUI.
+A tiny assistant for CUI operations.
 
 == Features
 
 * Pure Ruby :)
 
 == Usage
-
-=== Overview
-    
-    require 'io/nosey'
-    
-    class MyAssistant
-
-      include IO::Nosey
-      
-      def hear
-        ask 'question: '
-      end
- 
-    end
     
 === API
 
@@ -35,13 +21,13 @@ A tiny assistant for CUI.
 * #agree?
 * #choose
 
-==== Option Parameter(like "Keyword Arguments")
+==== #ask's option parameter
 
 ===== Sequense(input -> parse -> return)
 
-* input     # validation for input string
-* parse     # procedure for input string
-* return    # validation for return value
+1. input     # validation for input string
+2. parse     # procedure for input string
+3. return    # validation for return value
 
 ===== Other
 
@@ -50,24 +36,35 @@ A tiny assistant for CUI.
 
 === Tutorial
 
+Try below senario.
+Or excute "example/example.rb".
+
+==== shell
+
+    > irb
+    
+or
+    
+    > pry
+
 ==== setup
 
     require 'io/nosey'
     include IO::Nosey
-    
+
 ==== input validation
 
     ask "What's your name?", input: /\A\w+ \w+\z/
 
-==== default value
-
-    ask "What's your favorite?", default: 'ruby'
-
-==== mix
+==== mix the validations and procedures
 
     ask 'How old are you?', input:  /\A(\d+)\z/,
                             parse:  ->s{Integer s},
                             return: 10..100
+
+==== default value
+
+    ask "What's your favorite?", default: 'ruby'
 
 ==== yes or no
 
