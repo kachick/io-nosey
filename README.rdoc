@@ -33,6 +33,7 @@ A tiny assistant for CUI operations.
 
 * default   # when null input
 * echo      # set "echo is (true or false)"
+* error     # change error message when invalid input
 
 === Tutorial
 

@@ -14,7 +14,7 @@ class IO; module Nosey
     
     class InvalidInputError < InvalidError; end
 
-    OPTIONAL_KEYS = [:input, :default, :parse, :return, :echo].freeze
+    OPTIONAL_KEYS = [:input, :default, :parse, :return, :echo, :error].freeze
     DEFAULT_OPTIONS = {echo: true}.freeze
 
     def initialize(input=$stdin, output=$stdout)
@@ -34,6 +34,15 @@ class IO; module Nosey
       
       print prompt
       
+      error_message = 
+        (
+         if options.has_key?(:error)
+           options[:error]
+         else
+           'We are not satisfied with your answer.'
+         end
+         )
+
       if options.has_key? :default
         print "(default: #{options[:default]})"
       end
@@ -50,7 +59,7 @@ class IO; module Nosey
       end
       
       if options.has_key?(:input) and !_valid?(options[:input], input)
-        raise InvalidInputError, 'We are not satisfied with your answer.'
+        raise InvalidInputError, error_message
       end
       
       if options.has_key?(:parse)
@@ -58,7 +67,7 @@ class IO; module Nosey
       end
       
       if options.has_key?(:return) and !_valid?(options[:return], input)
-        raise InvalidInputError, 'We are not satisfied with your answer.'
+        raise InvalidInputError, error_message
       end
       
       input
