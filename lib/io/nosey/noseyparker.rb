@@ -83,7 +83,6 @@ class IO; module Nosey
         raise InvalidInputError
       end
     rescue InvalidInputError
-      puts $!.message unless $!.message.empty?
       retry
     end
     
