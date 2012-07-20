@@ -38,7 +38,12 @@ class IO; module Nosey
         print "(default: #{options[:default]})"
       end
       
-      input = options[:echo] ? gets.chomp : noecho(&:gets).chomp
+      if options[:echo]
+        input = gets.chomp
+      else
+        input = noecho(&:gets).chomp
+        puts
+      end
 
       if input.empty? and options.has_key?(:default)
         input = options[:default]
