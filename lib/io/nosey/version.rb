@@ -1,6 +1,5 @@
 class IO; module Nosey
 
-  VERSION = '0.1.0'.freeze
-  Version = VERSION
+  VERSION = '0.1.1'.freeze
 
 end; end
