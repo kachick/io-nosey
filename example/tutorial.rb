@@ -10,7 +10,7 @@ def show(obj)
 end
 
 # with input validation
-name = ask "What's your name?", input: /\A\w+ \w+\z/
+name = ask 'What\'s your name?("firstname lastname")', input: /\A\w+ \w+\z/
 show name
 
 # with default value

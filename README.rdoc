@@ -46,7 +46,7 @@ Or excute "example/tutorial.rb".
 
 ==== input validation
 
-    ask "What's your name?", input: /\A\w+ \w+\z/
+    ask 'What\'s your name?("firstname lastname")', input: /\A\w+ \w+\z/
 
 ==== mix the validations and procedures
 
