@@ -75,8 +75,13 @@ Or excute "example/tutorial.rb".
 
 == Requirements
 
-* Ruby 1.9.3 or later
-* validation-0.0.3
+=== Env
+
+* Ruby - 1.9.3 or later
+
+=== Library
+
+* validation - 0.0.3
 
 == Installation
 
