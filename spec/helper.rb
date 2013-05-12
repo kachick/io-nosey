@@ -2,8 +2,6 @@
 require 'rspec'
 require 'stringio'
 
-$VERBOSE = true
-
 require_relative '../lib/io/nosey'
 
 module IO::Nosey::NoseyParker::RspecHelpers

@@ -21,5 +21,3 @@ class IO
   end
 
 end
-
-

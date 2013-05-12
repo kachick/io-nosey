@@ -1,16 +1,11 @@
-gem 'hoe', '~> 3.0.6'
-require 'hoe'
-require 'fileutils'
+#!/usr/bin/env rake
+require 'bundler/gem_tasks'
 
-Hoe.plugin :newgem
+require 'rspec/core/rake_task'
 
-$hoe = Hoe.spec 'io-nosey' do
-  developer 'Kenichi Kamiya', 'kachick1+ruby@gmail.com'
-  self.rubyforge_name       = name
-  require_ruby_version '>= 1.9.3'
-  dependency 'validation', '~> 0.0.3', :runtime
-  dependency 'yard', '>= 0.8.2.1', :development
+task default: [:spec]
+
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.pattern = 'spec/**/*_spec.rb'
+  t.ruby_opts = %w[-w]
 end
-
-require 'newgem/tasks'
-Dir['tasks/**/*.rake'].each { |t| load t }
