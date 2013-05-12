@@ -17,6 +17,8 @@ class IO; module Nosey
     OPTIONAL_KEYS = [:input, :default, :parse, :return, :echo, :error].freeze
     DEFAULT_OPTIONS = {echo: true}.freeze
 
+    # @param input [IO, StringIO]
+    # @param output [IO, StringIO]
     def initialize(input=$stdin, output=$stdout)
       @input, @output = input, output
     end
@@ -24,8 +26,8 @@ class IO; module Nosey
     def_delegators :@input, :gets, :getc, :getch, :noecho, :raw, :winsize
     def_delegators :@output,:print, :puts, :flush, :<<    
     
-    # @param [String] prompt
-    # @param [Hash] options
+    # @param prompt [String]
+    # @param options [Hash]
     def ask(prompt, options=DEFAULT_OPTIONS)
       options = DEFAULT_OPTIONS.merge options
       unless valid_options? options
@@ -76,7 +78,7 @@ class IO; module Nosey
       retry
     end
     
-    # @param [String] prompt
+    # @param prompt [String]
     def agree?(prompt)
       print "#{prompt} [y or n]"
 
@@ -95,8 +97,8 @@ class IO; module Nosey
       retry
     end
     
-    # @param [String] prompt
-    # @param [Hash] choices {value => description}
+    # @param prompt [String]
+    # @param choices [Hash] key: value, value: description
     # @return a member of choices
     def choose(prompt, choices)
       raise ArgumentError unless valid_choices? choices
