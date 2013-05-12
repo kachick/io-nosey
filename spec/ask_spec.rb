@@ -1,18 +1,5 @@
 # coding: us-ascii
-$VERBOSE = true
 require_relative 'helper'
-
-module IO::Nosey::NoseyParker::RspecHelpers
-  def np_input(input)
-    @in << input
-    @in.rewind
-    @in
-  end
-end
-
-RSpec.configure do |configuration|
-  configuration.include IO::Nosey::NoseyParker::RspecHelpers
-end
 
 describe IO::Nosey::NoseyParker do
 
@@ -126,89 +113,6 @@ describe IO::Nosey::NoseyParker do
           answer = @np.ask @prompt, default: @default
           expect(answer).to eq(@default)
         end
-      end
-    end
-
-  end
-
-
-
-  describe "#agree?" do
-
-    before :each do
-      @prompt = 'Are you crazy? :)'
-    end
-
-    context "with affirmative inputs" do
-      context 'when the input is "y"' do
-        it "returns true" do
-          np_input "y"
-          ret = @np.agree? @prompt
-          expect(ret).to be_true
-        end
-      end
-
-      context 'when the input is "Y"' do
-        it "returns true" do
-          np_input "Y"
-          ret = @np.agree? @prompt
-          expect(ret).to be_true
-        end
-      end
-    end
-
-    context "with negative inputs" do
-      context 'when the input is "n"' do
-        it "returns false" do
-          np_input "n"
-          ret = @np.agree? @prompt
-          expect(ret).to be_false
-        end
-      end
-
-      context 'when the input is "N"' do
-        it "returns false" do
-          np_input "N"
-          ret = @np.agree? @prompt
-          expect(ret).to be_false
-        end
-      end
-    end
-
-  end
-
-
-
-  describe "#choose" do
-
-    before :each do
-      @prompt = 'Choose an index: '
-      @obj = Object.new # Don't use String for example.
-                        # That returns other instanse via Hash key.
-      @choices = {
-        5      => '5 is a Integer',
-        @obj   => '"obj" is a Object',
-        :FIVE  => ':FIVE is a Symbol'
-      }
-    end
-
-    context "when choose an index" do
-      it "returns the relative value if selected 1" do
-        np_input 1
-        ret = @np.choose @prompt, @choices
-        expect(ret).to equal(5)
-      end
-
-      it "returns the relative value if selected 2" do
-        np_input 2
-        ret = @np.choose @prompt, @choices
-        expect(ret).to equal(@obj)
-      end
-
-      it "returns the relative value if selected 3" do
-        np_input 3
-        ret = @np.choose @prompt, @choices
-        expect(ret).to equal(:FIVE)
       end
     end
 
