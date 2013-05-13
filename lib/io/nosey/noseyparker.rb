@@ -1,6 +1,8 @@
+# coding: us-ascii
 require 'forwardable'
 require 'io/console'
 require 'validation'
+require 'optionalargument'
 
 class IO; module Nosey 
 
@@ -14,9 +16,6 @@ class IO; module Nosey
     
     class InvalidInputError < InvalidError; end
 
-    OPTIONAL_KEYS = [:input, :default, :parse, :return, :echo, :error].freeze
-    DEFAULT_OPTIONS = {echo: true}.freeze
-
     # @param input [IO, StringIO]
     # @param output [IO, StringIO]
     def initialize(input=$stdin, output=$stdout)
@@ -25,51 +24,54 @@ class IO; module Nosey
 
     def_delegators :@input, :gets, :getc, :getch, :noecho, :raw, :winsize
     def_delegators :@output,:print, :puts, :flush, :<<    
-    
+
+    AskOpts = OptionalArgument.define {
+      opt :input, condition: Regexp
+      opt :parse, aliases: [:parser], condition: ->v{adjustable? v}
+      opt :return, condition: ->v{conditionable? v}
+      opt :default, condition: CAN(:to_str)
+      opt :echo, condition: BOOLEAN?, default: true
+      opt :error, condition: CAN(:to_str), default: 'Your answer is invalid.'
+    }
+
     # @param prompt [String]
     # @param options [Hash]
-    def ask(prompt, options=DEFAULT_OPTIONS)
-      options = DEFAULT_OPTIONS.merge options
-      unless valid_options? options
-        raise ArgumentError, 'including invalid options' 
-      end
+    # @option options [Regexp] :input
+    # @option options [Proc] :parse (also :parser)
+    # @option options [Proc, Method, #===] :return
+    # @option options [String, #to_str] :default
+    # @option options [Boolean] :echo
+    # @option options [String, #to_str] :error
+    def ask(prompt, options={})
+      opts = AskOpts.parse options
       
       print prompt
-      
-      error_message = 
-        (
-         if options.has_key?(:error)
-           options[:error]
-         else
-           'We are not satisfied with your answer.'
-         end
-         )
 
-      if options.has_key? :default
-        print "(default: #{options[:default]})"
+      if opts.default?
+        print "(default: #{opts.default})"
       end
       
-      if options[:echo]
+      if opts.echo?
         input = gets.chomp
       else
         input = noecho(&:gets).chomp
         puts
       end
 
-      if input.empty? and options.has_key?(:default)
-        input = options[:default]
+      if input.empty? and opts.default?
+        input = opts.default
       end
       
-      if options.has_key?(:input) and !_valid?(options[:input], input)
-        raise InvalidInputError, error_message
+      if opts.input? and !_valid?(opts.input, input)
+        raise InvalidInputError, opts.error
       end
       
-      if options.has_key?(:parse)
-        input = options[:parse].call input
+      if opts.parse?
+        input = opts.parse.call input
       end
       
-      if options.has_key?(:return) and !_valid?(options[:return], input)
-        raise InvalidInputError, error_message
+      if opts.return? and !_valid?(opts.return, input)
+        raise InvalidInputError, opts.error
       end
       
       input
@@ -122,20 +124,7 @@ class IO; module Nosey
     end
     
     private
-    
-    def valid_options?(options)
-      raise unless (options.keys - OPTIONAL_KEYS).empty?
-      raise if options.has_key?(:parse) and !Validation.adjustable?(options[:parse])
-      raise if options.has_key?(:input) and !options[:input].kind_of?(Regexp)
-      raise if options.has_key?(:return) and !conditionable?(options[:return])
-      raise if options.has_key?(:default) and !options[:default].respond_to?(:to_str)
-    rescue
-      $stderr.puts "WARN: Faced Exception: #{$!.inspect}"
-      false
-    else
-      true
-    end
-    
+
     def valid_choices?(choices)
       choices.keys.length >= 1
     end

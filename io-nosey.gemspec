@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 1.9.3'
   gem.add_dependency 'validation', '>= 0.0.3', '<= 0.0.4'
+  gem.add_dependency 'optionalargument', '>= 0.0.3', '< 0.0.4'
   gem.add_development_dependency 'rspec', '>= 2.13', '< 3'
   gem.add_development_dependency 'yard', '>= 0.8.6.1', '< 2'
   gem.add_development_dependency 'rake', '>= 10', '< 20'
