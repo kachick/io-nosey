@@ -37,36 +37,36 @@ Usage
 
 ### Tutorial
 
-Try below senario or excute "example/**_tutorial.rb"
+Try below senario on REPL(ex. irb, pry) or excute "example/**_tutorial.rb"
 
 ```ruby
 require 'io/nosey'
 include IO::Nosey
 
 # input validation
-ask 'What\'s your name?("firstname lastname")', input: /\A\w+ \w+\z/
+ask 'What\'s your name?("firstname lastname"): ', input: /\A\w+ \w+\z/
 
 # mix the validations and procedures
-ask 'How old are you?', input:  /\A(\d+)\z/,
-                        parse:  ->s{Integer s},
-                        return: 10..100
+ask 'How old are you?: ', input:  /\A(\d+)\z/,
+                          parse:  ->s{Integer s},
+                          return: 10..100
 
 # default value
-ask "What's your favorite?", default: 'ruby'
+ask "What's your favorite?: ", default: 'ruby'
 
 # yes or no
-agree? 'Do you like this API?'
+agree? 'Do you like this API?: '
 
 # for password
-ask "What's your password?", echo: false
+ask "What's your password?: ", echo: false
 
 # choose one from collections
-choose 'Which Five do you like?',  5      => '5 is a Integer',
+choose 'Which Five do you like?: ',  5      => '5 is a Integer',
                                    'five' => '"five" is a String',
                                    :FIVE  => ':FIVE is a Symbol'
 
 # multi line mode
-ask 'Write you poem and exit ctrl+d :) ', multi_line: true
+ask 'Write your poem and exit ctrl+d :) ', multi_line: true
 ```
 
 Requirements
