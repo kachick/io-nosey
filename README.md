@@ -37,8 +37,7 @@ Usage
 
 ### Tutorial
 
-Try below senario on the irb/pry.
-Or excute "example/tutorial.rb".
+Try below senario or excute "example/**_tutorial.rb"
 
 ```ruby
 require 'io/nosey'
