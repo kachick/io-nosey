@@ -31,6 +31,14 @@ describe IO::Nosey::NoseyParker do
       expect(displayed).to eq(@prompt)
     end
 
+    context "with truthy multi_line option" do
+      it "returns the origin lines without chomp" do
+        np_input "1\n2\n3\n"
+        answer = @np.ask @prompt, multi_line: true
+        expect(answer).to eq("1\n2\n3\n")
+      end
+    end
+
     context "with a validator for the input" do
       context "the validator matches the input" do
         let :answer do

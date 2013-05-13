@@ -27,9 +27,10 @@ input -> parse -> return
 
 Other
 
-* default   # when null input
-* echo      # set "echo is (true or false)"
-* error     # change error message when invalid input
+* default    # when null input
+* echo       # set "echo is (true or false)"
+* error      # change error message when invalid input
+* multi_line # prefer multi_line mode for inputs(exit via ctrl+d)
 
 Usage
 -----
@@ -64,6 +65,9 @@ ask "What's your password?", echo: false
 choose 'Which Five do you like?',  5      => '5 is a Integer',
                                    'five' => '"five" is a String',
                                    :FIVE  => ':FIVE is a Symbol'
+
+# multi line mode
+ask 'Write you poem and exit ctrl+d :) ', multi_line: true
 ```
 
 Requirements

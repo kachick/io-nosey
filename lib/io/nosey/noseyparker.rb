@@ -23,7 +23,7 @@ class IO; module Nosey
       @input, @output = input, output
     end
 
-    def_delegators :@input, :gets, :getc, :getch, :noecho, :raw, :winsize
+    def_delegators :@input, :gets, :getc, :getch, :read, :noecho, :raw, :winsize
     def_delegators :@output,:print, :puts, :flush, :<<    
 
     AskOpts = OptionalArgument.define {
@@ -33,6 +33,7 @@ class IO; module Nosey
       opt :default, condition: CAN(:to_str)
       opt :echo, condition: BOOLEAN?, default: true
       opt :error, condition: CAN(:to_str), default: 'Your answer is invalid.'
+      opt :multi_line, condition: BOOLEAN?, default: false
     }
 
     # @param prompt [String]
@@ -43,6 +44,7 @@ class IO; module Nosey
     # @option options [String, #to_str] :default
     # @option options [Boolean] :echo
     # @option options [String, #to_str] :error
+    # @option options [Boolean] :multi_line
     def ask(prompt, options={})
       opts = AskOpts.parse options
       
@@ -52,11 +54,20 @@ class IO; module Nosey
         print "(default: #{opts.default})"
       end
 
-      if opts.echo
-        input = gets.chomp
+      if opts.multi_line
+        if opts.echo
+          input = read
+        else
+          input = noecho(&:read)
+          puts
+        end
       else
-        input = noecho(&:gets).chomp
-        puts
+        if opts.echo
+          input = gets.chomp
+        else
+          input = noecho(&:gets).chomp
+          puts
+        end
       end
 
       if input.empty? and opts.default?
