@@ -100,7 +100,7 @@ class IO; module Nosey
     end
     
     # @param prompt [String]
-    # @param choices [Hash] key: value, value: description
+    # @param choices [Hash, #each_pair] key: value, value: description
     # @return a member of choices
     def choose(prompt, choices)
       raise ArgumentError unless valid_choices? choices
