@@ -51,8 +51,8 @@ class IO; module Nosey
       if opts.default?
         print "(default: #{opts.default})"
       end
-      
-      if opts.echo?
+
+      if opts.echo
         input = gets.chomp
       else
         input = noecho(&:gets).chomp
