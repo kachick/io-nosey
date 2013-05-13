@@ -1,4 +1,5 @@
 # coding: us-ascii
+
 require 'forwardable'
 require 'io/console'
 require 'validation'

@@ -1,3 +1,4 @@
+# coding: us-ascii
 # Copyright (C) 2011  Kenichi Kamiya
 
 require 'forwardable'
