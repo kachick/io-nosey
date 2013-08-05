@@ -11,10 +11,10 @@ Gem::Specification.new do |gem|
   gem.version       = IO::Nosey::VERSION.dup
 
   gem.required_ruby_version = '>= 1.9.3'
-  gem.add_dependency 'validation', '>= 0.0.3', '<= 0.0.4'
-  gem.add_dependency 'optionalargument', '>= 0.0.3', '< 0.0.4'
-  gem.add_development_dependency 'rspec', '>= 2.13', '< 3'
-  gem.add_development_dependency 'yard', '>= 0.8.6.1', '< 2'
+  gem.add_dependency 'validation', '~> 0.0.6'
+  gem.add_dependency 'optionalargument', '~> 0.1.0'
+  gem.add_development_dependency 'rspec', '>= 2.14.1', '< 3'
+  gem.add_development_dependency 'yard', '>= 0.8.7', '< 0.9'
   gem.add_development_dependency 'rake', '>= 10', '< 20'
   gem.add_development_dependency 'bundler', '>= 1.3.5', '< 2'
 
