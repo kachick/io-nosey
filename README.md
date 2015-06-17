@@ -3,6 +3,7 @@ io-nosey
 
 [![Build Status](https://secure.travis-ci.org/kachick/io-nosey.png)](http://travis-ci.org/kachick/io-nosey)
 [![Gem Version](https://badge.fury.io/rb/io-nosey.png)](http://badge.fury.io/rb/io-nosey)
+[![Dependency Status](https://gemnasium.com/kachick/io-nosey.svg)](https://gemnasium.com/kachick/io-nosey)
 
 Description
 -----------
@@ -86,7 +87,7 @@ Link
 
 * [Home](http://kachick.github.com/io-nosey/)
 * [code](https://github.com/kachick/io-nosey)
-* [API](http://kachick.github.com/io-nosey/yard/frames.html)
+* [API](http://www.rubydoc.info/github/kachick/io-nosey)
 * [issues](https://github.com/kachick/io-nosey/issues)
 * [CI](http://travis-ci.org/#!/kachick/io-nosey)
 * [gem](https://rubygems.org/gems/io-nosey)
