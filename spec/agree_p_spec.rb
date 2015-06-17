@@ -25,7 +25,7 @@ describe IO::Nosey::NoseyParker do
         it "returns true" do
           np_input "y"
           ret = @np.agree? @prompt
-          expect(ret).to be_true
+          expect(ret).to be(true)
         end
       end
 
@@ -33,7 +33,7 @@ describe IO::Nosey::NoseyParker do
         it "returns true" do
           np_input "Y"
           ret = @np.agree? @prompt
-          expect(ret).to be_true
+          expect(ret).to be(true)
         end
       end
     end
@@ -43,7 +43,7 @@ describe IO::Nosey::NoseyParker do
         it "returns false" do
           np_input "n"
           ret = @np.agree? @prompt
-          expect(ret).to be_false
+          expect(ret).to be(false)
         end
       end
 
@@ -51,7 +51,7 @@ describe IO::Nosey::NoseyParker do
         it "returns false" do
           np_input "N"
           ret = @np.agree? @prompt
-          expect(ret).to be_false
+          expect(ret).to be(false)
         end
       end
     end
