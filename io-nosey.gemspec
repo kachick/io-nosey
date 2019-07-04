@@ -13,7 +13,6 @@ Gem::Specification.new do |gem|
   gem.name          = lib_name.dup
   gem.version       = IO::Nosey::VERSION.dup
 
-  gem.required_ruby_version = '>= 1.9.3'
   gem.add_dependency 'validation', '~> 0.0.7'
   gem.add_dependency 'optionalargument', '~> 0.1.0'
   gem.add_development_dependency 'rspec', '>= 3.3', '< 4'

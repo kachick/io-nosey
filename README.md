@@ -73,7 +73,7 @@ ask 'Write your poem and exit ctrl+d :) ', multi_line: true
 Requirements
 -------------
 
-* [Ruby 1.9.3 or later](http://travis-ci.org/#!/kachick/io-nosey)
+* [Ruby 2.5 or later](http://travis-ci.org/#!/kachick/io-nosey)
 
 Install
 -------
