@@ -3,7 +3,6 @@ io-nosey
 
 [![Build Status](https://secure.travis-ci.org/kachick/io-nosey.png)](http://travis-ci.org/kachick/io-nosey)
 [![Gem Version](https://badge.fury.io/rb/io-nosey.png)](http://badge.fury.io/rb/io-nosey)
-[![Dependency Status](https://gemnasium.com/kachick/io-nosey.svg)](https://gemnasium.com/kachick/io-nosey)
 
 Description
 -----------
