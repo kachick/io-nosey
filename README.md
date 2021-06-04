@@ -44,7 +44,7 @@ require 'io/nosey'
 include IO::Nosey
 
 # input validation
-ask 'What\'s your name?("firstname lastname"): ', input: /\A\w+ \w+\z/
+ask 'What\'s your name?("first_name last_name"): ', input: /\A\w+ \w+\z/
 
 # mix the validations and procedures
 ask 'How old are you?: ', input:  /\A(\d+)\z/,
@@ -94,6 +94,6 @@ Link
 License
 --------
 
-The MIT X11 License  
-Copyright (c) 2011 Kenichi Kamiya  
+The MIT X11 License
+Copyright (c) 2011 Kenichi Kamiya
 See MIT-LICENSE for further details.

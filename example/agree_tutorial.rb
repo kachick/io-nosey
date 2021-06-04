@@ -1,4 +1,5 @@
 # coding: us-ascii
+
 require_relative 'helper'
 
 # yes or no

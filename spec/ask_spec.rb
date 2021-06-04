@@ -1,7 +1,6 @@
 # coding: us-ascii
-require_relative 'helper'
 
-describe IO::Nosey::NoseyParker do
+RSpec.describe IO::Nosey::NoseyParker do
 
   before :each do
     @in = StringIO.new
@@ -89,7 +88,7 @@ describe IO::Nosey::NoseyParker do
         context "the validator does not match the first values but matches the second value" do
           let :answer do
             np_input "2\n3"
-            @np.ask @prompt, parse: ->input{input.to_i}, 
+            @np.ask @prompt, parse: ->input{input.to_i},
                              return: 3..5,
                              error: 'Your input is invalid'
           end

@@ -1,7 +1,6 @@
 # coding: us-ascii
-require_relative 'helper'
 
-describe IO::Nosey::NoseyParker do
+RSpec.describe IO::Nosey::NoseyParker do
 
   before :each do
     @in = StringIO.new
