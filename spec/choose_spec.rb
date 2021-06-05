@@ -1,4 +1,5 @@
 # coding: us-ascii
+# frozen_string_literal: true
 
 RSpec.describe IO::Nosey::NoseyParker do
 
@@ -13,7 +14,7 @@ RSpec.describe IO::Nosey::NoseyParker do
     @out.string
   end
 
-  describe "#choose" do
+  describe '#choose' do
 
     before :each do
       @prompt = 'Choose an index: '
@@ -26,20 +27,20 @@ RSpec.describe IO::Nosey::NoseyParker do
       }
     end
 
-    context "when choose an index" do
-      it "returns the relative value if selected 1" do
+    context 'when choose an index' do
+      it 'returns the relative value if selected 1' do
         np_input 1
         ret = @np.choose @prompt, @choices
         expect(ret).to equal(5)
       end
 
-      it "returns the relative value if selected 2" do
+      it 'returns the relative value if selected 2' do
         np_input 2
         ret = @np.choose @prompt, @choices
         expect(ret).to equal(@obj)
       end
 
-      it "returns the relative value if selected 3" do
+      it 'returns the relative value if selected 3' do
         np_input 3
         ret = @np.choose @prompt, @choices
         expect(ret).to equal(:FIVE)

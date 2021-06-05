@@ -8,11 +8,17 @@ require 'warning'
 
 require_relative '../lib/io/nosey'
 
-module IO::Nosey::NoseyParker::RspecHelpers
+module IO
+  module Nosey
+  module NoseyParker
+  module RspecHelpers
   def np_input(input)
     @in << input
     @in.rewind
     @in
+  end
+  end
+  end
   end
 end
 

@@ -1,4 +1,5 @@
 # coding: us-ascii
+# frozen_string_literal: true
 
 RSpec.describe IO::Nosey::NoseyParker do
 
@@ -13,42 +14,42 @@ RSpec.describe IO::Nosey::NoseyParker do
     @out.string
   end
 
-  describe "#agree?" do
+  describe '#agree?' do
 
     before :each do
       @prompt = 'Are you crazy? :)'
     end
 
-    context "with affirmative inputs" do
+    context 'with affirmative inputs' do
       context 'when the input is "y"' do
-        it "returns true" do
-          np_input "y"
+        it 'returns true' do
+          np_input 'y'
           ret = @np.agree? @prompt
           expect(ret).to be(true)
         end
       end
 
       context 'when the input is "Y"' do
-        it "returns true" do
-          np_input "Y"
+        it 'returns true' do
+          np_input 'Y'
           ret = @np.agree? @prompt
           expect(ret).to be(true)
         end
       end
     end
 
-    context "with negative inputs" do
+    context 'with negative inputs' do
       context 'when the input is "n"' do
-        it "returns false" do
-          np_input "n"
+        it 'returns false' do
+          np_input 'n'
           ret = @np.agree? @prompt
           expect(ret).to be(false)
         end
       end
 
       context 'when the input is "N"' do
-        it "returns false" do
-          np_input "N"
+        it 'returns false' do
+          np_input 'N'
           ret = @np.agree? @prompt
           expect(ret).to be(false)
         end

@@ -1,4 +1,5 @@
 # coding: us-ascii
+# frozen_string_literal: true
 
 RSpec.describe IO::Nosey::NoseyParker do
 
@@ -13,7 +14,7 @@ RSpec.describe IO::Nosey::NoseyParker do
     @out.string
   end
 
-  describe "#ask" do
+  describe '#ask' do
 
     before :each do
       @prompt = 'What your name?: '
@@ -25,67 +26,67 @@ RSpec.describe IO::Nosey::NoseyParker do
       @np.ask @prompt
     end
 
-    it "asks a question with the parametered prompt and returns the input" do
+    it 'asks a question with the parametered prompt and returns the input' do
       expect(answer).to eq(@answer)
       expect(displayed).to eq(@prompt)
     end
 
-    context "with truthy multi_line option" do
-      it "returns the origin lines without chomp" do
+    context 'with truthy multi_line option' do
+      it 'returns the origin lines without chomp' do
         np_input "1\n2\n3\n"
         answer = @np.ask @prompt, multi_line: true
         expect(answer).to eq("1\n2\n3\n")
       end
     end
 
-    context "with a validator for the input" do
-      context "the validator matches the input" do
+    context 'with a validator for the input' do
+      context 'the validator matches the input' do
         let :answer do
           np_input @answer
           @np.ask @prompt, input: /\A#{@answer}\z/
         end
 
-        it "returns the input" do
+        it 'returns the input' do
           expect(answer).to eq(@answer)
         end
       end
 
-      context "the validator does not match the first input but matches the second input" do
+      context 'the validator does not match the first input but matches the second input' do
         let :answer do
           np_input "dummyFoo 2 Bardummy\nFoo 2 Bar"
           @np.ask @prompt, input: /\A#{@answer}\z/, error: 'Your input is invalid'
         end
 
-        it "displays the parametered error message and returns the second input" do
+        it 'displays the parametered error message and returns the second input' do
           expect(answer).to eq(@answer)
           expect(displayed).to eq("What your name?: Your input is invalid\nWhat your name?: ")
         end
       end
     end
 
-    context "with a parser for the input" do
+    context 'with a parser for the input' do
       let :answer do
         np_input @answer
         @np.ask @prompt, parse: ->input{input.downcase}
       end
 
-      it "returns a parsed value" do
+      it 'returns a parsed value' do
         expect(answer).to eq(@answer.downcase)
       end
 
-      context "with a validator for the returned value" do
-        context "the validator matches the input" do
+      context 'with a validator for the returned value' do
+        context 'the validator matches the input' do
           let :answer do
             np_input @answer
             @np.ask @prompt, parse: ->input{input.downcase}, return: /./
           end
 
-          it "returns a parsed value" do
+          it 'returns a parsed value' do
             expect(answer).to eq(@answer.downcase)
           end
         end
 
-        context "the validator does not match the first values but matches the second value" do
+        context 'the validator does not match the first values but matches the second value' do
           let :answer do
             np_input "2\n3"
             @np.ask @prompt, parse: ->input{input.to_i},
@@ -93,7 +94,7 @@ RSpec.describe IO::Nosey::NoseyParker do
                              error: 'Your input is invalid'
           end
 
-          it "displays the parametered error message and returns the parsed value of the second input" do
+          it 'displays the parametered error message and returns the parsed value of the second input' do
             expect(answer).to eq(3)
             expect(displayed).to eq("What your name?: Your input is invalid\nWhat your name?: ")
           end
@@ -101,21 +102,21 @@ RSpec.describe IO::Nosey::NoseyParker do
       end
     end
 
-    context "with a default input option" do
+    context 'with a default input option' do
       before :each do
         @default = ':)'
       end
 
-      context "with input" do
-        it "returns the default option" do
+      context 'with input' do
+        it 'returns the default option' do
           np_input @answer
           answer = @np.ask @prompt, default: @default
           expect(answer).to eq(@answer)
         end
       end
 
-      context "without input(just entered the return key)" do
-        it "returns the default option" do
+      context 'without input(just entered the return key)' do
+        it 'returns the default option' do
           np_input "\n"
           answer = @np.ask @prompt, default: @default
           expect(answer).to eq(@default)
