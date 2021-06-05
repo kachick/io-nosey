@@ -4,10 +4,21 @@
 class IO
   module Nosey
     class Parker
-      include Validation
-      include Validation::Adjustment
+      class Error < StandardError; end
+      class InvalidInputError < Error; end
 
-      class InvalidInputError < InvalidError; end
+      def self.adjustable?(object)
+        case object
+        when Proc
+          object.arity == 1
+        else
+          if object.respond_to?(:to_proc)
+            object.to_proc.arity == 1
+          else
+            false
+          end
+        end
+      end
 
       # @param input [IO, StringIO]
       # @param output [IO, StringIO]
@@ -17,7 +28,7 @@ class IO
 
       AskOpts = OptionalArgument.define {
         opt(:input, condition: Regexp)
-        opt(:parse, aliases: [:parser], condition: ->v { Validation::Adjustment.adjustable?(v) })
+        opt(:parse, aliases: [:parser], condition: ->v { Parker.adjustable?(v) })
         opt(:return, condition: ->v { Eqq.valid?(v) })
         opt(:default, condition: CAN(:to_str))
         opt(:echo, condition: BOOLEAN(), default: true)
@@ -55,7 +66,7 @@ class IO
           input = opts.default
         end
 
-        if opts.input? && !_valid?(opts.input, input)
+        if opts.input? && !valid?(opts.input, input)
           raise InvalidInputError, opts.error
         end
 
@@ -63,12 +74,12 @@ class IO
           input = opts.parse.call(input)
         end
 
-        if opts.return? && !_valid?(opts.return, input)
+        if opts.return? && !valid?(opts.return, input)
           raise InvalidInputError, opts.error
         end
 
         input
-      rescue InvalidError
+      rescue InvalidInputError
         @output.puts $!.message unless $!.message.empty?
         retry
       end
@@ -111,10 +122,27 @@ class IO
 
         number = ask('Select index:',
                      input: /\A(\d+)\z/,
-                     parse: PARSE(Integer),
+                     parse: ->v { Integer(v) },
                      return: Eqq.AND(Integer, 1..(index - 1)))
 
         pairs[number]
+      end
+
+      private
+
+      # @param [Proc, Method, #===] pattern
+      # @param [Object] value
+      def valid?(pattern, value)
+        !!(
+          case pattern
+          when Proc
+            instance_exec(value, &pattern)
+          when Method
+            pattern.call(value)
+          else
+            pattern === value
+          end
+        )
       end
     end
   end

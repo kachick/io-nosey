@@ -4,7 +4,6 @@
 # Copyright (C) 2011  Kenichi Kamiya
 
 require 'eqq'
-require 'validation'
 require 'optionalargument'
 
 class IO
