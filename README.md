@@ -21,32 +21,37 @@ Try below scenario on REPL. Or execute this repository's [./bin/console](bin/con
 
 ```ruby
 require 'io/nosey'
-include IO::Nosey
+
+parker = IO::Nosey::Parker.new
 
 # input validation
-ask 'What\'s your name?("first_name last_name"): ', input: /\A\w+ \w+\z/
+parker.ask('What\'s your name?("first_name last_name"): ', input: /\A\w+ \w+\z/)
 
 # mix the validations and procedures
-ask 'How old are you?: ', input:  /\A(\d+)\z/,
-                          parse:  ->s{Integer s},
-                          return: 10..100
+parker.ask('How old are you?: ',
+  input:  /\A(\d+)\z/,
+  parse:  ->s{Integer s},
+  return: 10..100
+)
 
 # default value
-ask "What's your favorite?: ", default: 'ruby'
+parker.ask("What's your favorite?: ", default: 'ruby')
 
 # yes or no
-agree? 'Do you like this API?: '
+parker.agree?('Do you like this API?: ')
 
-# for password
-ask "What's your password?: ", echo: false
+# for password and secrets
+parker.ask("What's your password?: ", echo: false)
 
 # choose one from collections
-choose('Which Five do you like?: ', 5      => '5 is a Integer',
-                                   'five' => '"five" is a String',
-                                   :FIVE  => ':FIVE is a Symbol')
+parker.choose('Which Five do you like?: ',
+  5 => '5 is a Integer',
+  'five' => '"five" is a String',
+  :FIVE  => ':FIVE is a Symbol'
+)
 
 # multi line mode
-ask 'Write your poem and exit ctrl+d :) ', multi_line: true
+parker.ask('Write your poem and exit ctrl+d :) ', multi_line: true)
 ```
 
 ## Features

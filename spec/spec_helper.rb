@@ -8,7 +8,7 @@ require 'warning'
 
 require_relative '../lib/io/nosey'
 
-module NoseyParkerRspecHelpers
+module ParkerRspecHelpers
   def np_input(input)
     @in << input
     @in.rewind
@@ -28,7 +28,7 @@ RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
 
-  config.include NoseyParkerRspecHelpers
+  config.include ParkerRspecHelpers
 end
 
 
