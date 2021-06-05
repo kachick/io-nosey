@@ -138,4 +138,5 @@ class IO
         choices.keys.length >= 1
       end
     end
-  end; end
+  end
+end

@@ -79,6 +79,8 @@ Style/StringLiteralsInInterpolation:
 
 Style/TopLevelMethodDefinition:
   Enabled: true
+  Exclude:
+    - 'example/**/*'
 
 Style/AndOr:
   Enabled: true
@@ -392,6 +394,9 @@ Style/MixinGrouping:
 
 Style/MixinUsage:
   Enabled: true
+  Exclude:
+    - 'example/**/*'
+    - '**.md'
 
 Style/ModuleFunction:
   Enabled: false

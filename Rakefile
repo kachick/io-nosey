@@ -18,7 +18,7 @@ task default: [:test_behaviors]
 task test_behaviors: [:spec]
 
 desc 'Simulate CI results in local machine as possible'
-multitask simulate_ci: [:test_behaviors, :validate_signatures, :rubocop]
+multitask simulate_ci: [:test_behaviors, :rubocop]
 
 RSpec::Core::RakeTask.new(:spec) do |rt|
   rt.ruby_opts = %w[-w]
