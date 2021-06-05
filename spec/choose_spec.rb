@@ -1,30 +1,23 @@
 # coding: us-ascii
 # frozen_string_literal: true
 
-RSpec.describe IO::Nosey::NoseyParker do
-
-  before :each do
+RSpec.describe IO::Nosey::Parker do
+  before(:each) do
     @in = StringIO.new
     @out = StringIO.new
-    @np = IO::Nosey::NoseyParker.new @in, @out
-  end
-
-  # Use after any inputs
-  let :displayed do
-    @out.string
+    @np = IO::Nosey::Parker.new(input: @in, output: @out)
   end
 
   describe '#choose' do
-
-    before :each do
+    before(:each) do
       @prompt = 'Choose an index: '
       @obj = Object.new # Don't use String for example.
-                        # That returns other instanse via Hash key.
+                        # That returns other instance via Hash key.
       @choices = {
         5      => '5 is a Integer',
         @obj   => '"obj" is a Object',
         :FIVE  => ':FIVE is a Symbol'
-      }
+      }.freeze
     end
 
     context 'when choose an index' do
@@ -46,7 +39,5 @@ RSpec.describe IO::Nosey::NoseyParker do
         expect(ret).to equal(:FIVE)
       end
     end
-
   end
-
 end

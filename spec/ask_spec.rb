@@ -1,32 +1,27 @@
 # coding: us-ascii
 # frozen_string_literal: true
 
-RSpec.describe IO::Nosey::NoseyParker do
-
-  before :each do
+RSpec.describe IO::Nosey::Parker do
+  before(:each) do
     @in = StringIO.new
     @out = StringIO.new
-    @np = IO::Nosey::NoseyParker.new @in, @out
+    @np = IO::Nosey::Parker.new(input: @in, output: @out)
   end
 
-  # Use after any inputs
-  let :displayed do
-    @out.string
-  end
+  let(:displayed) { @out.string }
 
   describe '#ask' do
-
-    before :each do
+    before(:each) do
       @prompt = 'What your name?: '
       @answer = 'Foo 2 Bar'
     end
 
-    let :answer do
+    let(:answer) do
       np_input @answer
       @np.ask @prompt
     end
 
-    it 'asks a question with the parametered prompt and returns the input' do
+    it 'asks a question with the parameters prompt and returns the input' do
       expect(answer).to eq(@answer)
       expect(displayed).to eq(@prompt)
     end
@@ -41,7 +36,7 @@ RSpec.describe IO::Nosey::NoseyParker do
 
     context 'with a validator for the input' do
       context 'the validator matches the input' do
-        let :answer do
+        let(:answer) do
           np_input @answer
           @np.ask @prompt, input: /\A#{@answer}\z/
         end
@@ -52,12 +47,12 @@ RSpec.describe IO::Nosey::NoseyParker do
       end
 
       context 'the validator does not match the first input but matches the second input' do
-        let :answer do
+        let(:answer) do
           np_input "dummyFoo 2 Bardummy\nFoo 2 Bar"
           @np.ask @prompt, input: /\A#{@answer}\z/, error: 'Your input is invalid'
         end
 
-        it 'displays the parametered error message and returns the second input' do
+        it 'displays the parameters error message and returns the second input' do
           expect(answer).to eq(@answer)
           expect(displayed).to eq("What your name?: Your input is invalid\nWhat your name?: ")
         end
@@ -65,7 +60,7 @@ RSpec.describe IO::Nosey::NoseyParker do
     end
 
     context 'with a parser for the input' do
-      let :answer do
+      let(:answer) do
         np_input @answer
         @np.ask @prompt, parse: ->input{input.downcase}
       end
@@ -76,7 +71,7 @@ RSpec.describe IO::Nosey::NoseyParker do
 
       context 'with a validator for the returned value' do
         context 'the validator matches the input' do
-          let :answer do
+          let(:answer) do
             np_input @answer
             @np.ask @prompt, parse: ->input{input.downcase}, return: /./
           end
@@ -87,14 +82,14 @@ RSpec.describe IO::Nosey::NoseyParker do
         end
 
         context 'the validator does not match the first values but matches the second value' do
-          let :answer do
+          let(:answer) do
             np_input "2\n3"
             @np.ask @prompt, parse: ->input{input.to_i},
                              return: 3..5,
                              error: 'Your input is invalid'
           end
 
-          it 'displays the parametered error message and returns the parsed value of the second input' do
+          it 'displays the parameters error message and returns the parsed value of the second input' do
             expect(answer).to eq(3)
             expect(displayed).to eq("What your name?: Your input is invalid\nWhat your name?: ")
           end
@@ -103,7 +98,7 @@ RSpec.describe IO::Nosey::NoseyParker do
     end
 
     context 'with a default input option' do
-      before :each do
+      before(:each) do
         @default = ':)'
       end
 
@@ -123,7 +118,5 @@ RSpec.describe IO::Nosey::NoseyParker do
         end
       end
     end
-
   end
-
 end

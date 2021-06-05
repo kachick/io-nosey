@@ -1,22 +1,15 @@
 # coding: us-ascii
 # frozen_string_literal: true
 
-RSpec.describe IO::Nosey::NoseyParker do
-
-  before :each do
+RSpec.describe IO::Nosey::Parker do
+  before(:each) do
     @in = StringIO.new
     @out = StringIO.new
-    @np = IO::Nosey::NoseyParker.new @in, @out
-  end
-
-  # Use after any inputs
-  let :displayed do
-    @out.string
+    @np = IO::Nosey::Parker.new(input: @in, output: @out)
   end
 
   describe '#agree?' do
-
-    before :each do
+    before(:each) do
       @prompt = 'Are you crazy? :)'
     end
 
