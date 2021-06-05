@@ -1,50 +1,30 @@
-io-nosey
-==========
+# io-nosey
 
-[![Build Status](https://secure.travis-ci.org/kachick/io-nosey.png)](http://travis-ci.org/kachick/io-nosey)
+![Build Status](https://github.com/kachick/io-nosey/actions/workflows/test_behaviors.yml/badge.svg?branch=main)
 [![Gem Version](https://badge.fury.io/rb/io-nosey.png)](http://badge.fury.io/rb/io-nosey)
 
-Description
------------
+Tiny assistant for CUI operations.
 
-A tiny assistant for CUI operations.
+## Usage
 
-Features
---------
+Require Ruby 2.6 or later
 
-* #ask
-* #agree?
-* #choose
-* PureRuby :)
+This command will install latest version into your machines
 
-### #ask's option parameter
+```shell
+gem install 'io-nosey'
+```
 
-input -> parse -> return
+### Overview
 
-1. input     # validation for input string
-2. parse     # procedure for input string
-3. return    # validation for return value
-
-Other
-
-* default    # when null input
-* echo       # set "echo is (true or false)"
-* error      # change error message when invalid input
-* multi_line # prefer multi_line mode for inputs(exit via ctrl+d)
-
-Usage
------
-
-### Tutorial
-
-Try below senario on REPL(ex. irb, pry) or excute "example/**_tutorial.rb"
+Try below scenario on REPL. Or execute this repository's [./bin/console](bin/console)
 
 ```ruby
 require 'io/nosey'
 include IO::Nosey
 
 # input validation
-ask 'What\'s your name?("firstname lastname"): ', input: /\A\w+ \w+\z/
+ask 'What\'s your name?("first_name last_name"): ', input: /\A\w+ \w+\z/
 
 # mix the validations and procedures
 ask 'How old are you?: ', input:  /\A(\d+)\z/,
@@ -61,39 +41,36 @@ agree? 'Do you like this API?: '
 ask "What's your password?: ", echo: false
 
 # choose one from collections
-choose 'Which Five do you like?: ',  5      => '5 is a Integer',
+choose('Which Five do you like?: ', 5      => '5 is a Integer',
                                    'five' => '"five" is a String',
-                                   :FIVE  => ':FIVE is a Symbol'
+                                   :FIVE  => ':FIVE is a Symbol')
 
 # multi line mode
 ask 'Write your poem and exit ctrl+d :) ', multi_line: true
 ```
 
-Requirements
--------------
+## Features
 
-* [Ruby 2.5 or later](http://travis-ci.org/#!/kachick/io-nosey)
+* #ask
+* #agree?
+* #choose
 
-Install
--------
+### #ask option parameter
 
-```bash
-gem install io-nosey
-```
+input -> parse -> return
 
-Link
-----
+1. input     # validation for input string
+2. parse     # procedure for input string
+3. return    # validation for return value
 
-* [Home](http://kachick.github.com/io-nosey/)
-* [code](https://github.com/kachick/io-nosey)
-* [API](http://www.rubydoc.info/github/kachick/io-nosey)
-* [issues](https://github.com/kachick/io-nosey/issues)
-* [CI](http://travis-ci.org/#!/kachick/io-nosey)
-* [gem](https://rubygems.org/gems/io-nosey)
+Other
 
-License
---------
+* default    # when null input
+* echo       # set "echo is (true or false)"
+* error      # change error message when invalid input
+* multi_line # prefer multi_line mode for inputs(exit via ctrl+d)
 
-The MIT X11 License  
-Copyright (c) 2011 Kenichi Kamiya  
-See MIT-LICENSE for further details.
+## Links
+
+* [Repository](https://github.com/kachick/io-nosey)
+* [API documents](https://kachick.github.io/io-nosey/)
