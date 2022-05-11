@@ -31,11 +31,8 @@ RSpec.configure do |config|
   config.include ParkerRspecHelpers
 end
 
-
-if Warning.respond_to?(:[]=) # @TODO Removable this guard after dropped ruby 2.6
-  Warning[:deprecated] = true
-  Warning[:experimental] = true
-end
+Warning[:deprecated] = true
+Warning[:experimental] = true
 
 Gem.path.each do |path|
   Warning.ignore(//, path)

@@ -7,7 +7,7 @@ Tiny assistant for CUI operations.
 
 ## Usage
 
-Require Ruby 2.6 or later
+Require Ruby 2.7 or later
 
 This command will install latest version into your machines
 

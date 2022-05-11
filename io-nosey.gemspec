@@ -17,17 +17,18 @@ Gem::Specification.new do |gem|
   gem.version       = IO::Nosey::VERSION
 
   gem.metadata = {
-    'documentation_uri' => 'https://kachick.github.io/io-nosey/',
-    'homepage_uri'      => repository_url,
-    'source_code_uri'   => repository_url,
-    'bug_tracker_uri'   => "#{repository_url}/issues"
+    'documentation_uri'     => 'https://kachick.github.io/io-nosey/',
+    'homepage_uri'          => repository_url,
+    'source_code_uri'       => repository_url,
+    'bug_tracker_uri'       => "#{repository_url}/issues",
+    'rubygems_mfa_required' => 'true'
   }
 
-  gem.required_ruby_version = Gem::Requirement.new('>= 2.6.0')
+  gem.required_ruby_version = Gem::Requirement.new('>= 2.7.0')
 
-  gem.add_runtime_dependency 'io-console'
-  gem.add_runtime_dependency 'eqq', '>= 0.0.5', '< 0.1.0'
-  gem.add_runtime_dependency 'optionalargument', '>= 0.5.1', '< 0.6.0'
+  gem.add_runtime_dependency 'io-console', '~> 0.5.11'
+  gem.add_runtime_dependency 'eqq', '~> 0.1.1'
+  gem.add_runtime_dependency 'optionalargument', '~> 0.6.0'
 
   # common
 
