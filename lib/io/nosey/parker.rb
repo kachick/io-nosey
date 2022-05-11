@@ -29,7 +29,7 @@ class IO
       AskOpts = OptionalArgument.define {
         opt(:input, condition: Regexp)
         opt(:parse, aliases: [:parser], condition: ->v { Parker.adjustable?(v) })
-        opt(:return, condition: ->v { Eqq.valid?(v) })
+        opt(:return, condition: ->v { Eqq.pattern?(v) })
         opt(:default, condition: CAN(:to_str))
         opt(:echo, condition: BOOLEAN(), default: true)
         opt(:error, condition: CAN(:to_str), default: 'Your answer is invalid.')
