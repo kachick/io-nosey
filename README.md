@@ -1,7 +1,7 @@
 # io-nosey
 
 ![Build Status](https://github.com/kachick/io-nosey/actions/workflows/test_behaviors.yml/badge.svg?branch=main)
-[![Gem Version](https://badge.fury.io/rb/io-nosey.png)](http://badge.fury.io/rb/io-nosey)
+[![Gem Version](https://badge.fury.io/rb/io-nosey.svg)](http://badge.fury.io/rb/io-nosey)
 
 Tiny assistant for CUI operations.
 
