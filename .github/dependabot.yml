@@ -3,16 +3,11 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
-      time: "08:00"
-      timezone: "Asia/Tokyo"
+      interval: "weekly"
   - package-ecosystem: "bundler"
     directory: "/"
     schedule:
-      interval: "daily"
-      time: "08:00"
-      timezone: "Asia/Tokyo"
-    versioning-strategy: increase
+      interval: "monthly"
     ignore:
       - dependency-name: 'rubocop'
         versions:
