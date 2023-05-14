@@ -1,7 +1,11 @@
 # io-nosey
 
+- _**This repository is archived**_
+- _**No longer maintained**_
+- _**All versions have been yanked from <https://rubygems.org> for releasing valuable namespace for others**_
+- _**I recommend using a different library for this purpose, as an example is  <https://github.com/Shopify/cli-ui>**_
+
 ![Build Status](https://github.com/kachick/io-nosey/actions/workflows/test_behaviors.yml/badge.svg?branch=main)
-[![Gem Version](https://badge.fury.io/rb/io-nosey.svg)](http://badge.fury.io/rb/io-nosey)
 
 Tiny assistant for CUI operations.
 
@@ -9,11 +13,6 @@ Tiny assistant for CUI operations.
 
 Require Ruby 3.1 or later
 
-This command will install latest version into your machines
-
-```shell
-gem install 'io-nosey'
-```
 
 ### Overview
 
